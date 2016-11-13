@@ -5,5 +5,5 @@ element.innerHTML = "sravani";
 
 var img = document.getElementById('image');
 img.onclick = function() {
-    var interval = setInterval(moveLeft, 100);
+    var interval = setInterval(moveRight, 100);
 };
