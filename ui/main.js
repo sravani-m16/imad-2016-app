@@ -17,7 +17,7 @@ submit.onclick = function() {
   var password = document.getElementById('password').value;
   console.log(username);
   console.log(password);
-  request.open('POST' , 'http://sravani-m16.imad.hasura-app.io/submit-name?name=' + name , true);
+  request.open('POST' , 'http://sravani-m16.imad.hasura-app.io/login' + name , true);
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify({username: username, password:password}));
 };
