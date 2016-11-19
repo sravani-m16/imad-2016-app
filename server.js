@@ -56,7 +56,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-fuction hash(input) {
+function hash(input) {
     
 }
 app.get('/hash/:input', function(req, res) {
