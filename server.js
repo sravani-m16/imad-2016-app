@@ -31,7 +31,7 @@ function createTemplate (data) {
     
     var htmlTemplate = `
     <html>
-      <head>
+      <head bg="#ffebcd">
           <title>
               ${title}
           </title>
