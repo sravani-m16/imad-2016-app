@@ -8,8 +8,8 @@ var session = require('express-session');
 
 // commit
 var config = {
-    user: 'sravani-m16',
-    database: 'sravani-m16',
+    user: 'coco98',
+    database: 'coco98',
     host: 'db.imad.hasura-app.io',
     port: '5432',
     password: process.env.DB_PASSWORD
@@ -31,7 +31,7 @@ function createTemplate (data) {
     
     var htmlTemplate = `
     <html>
-      <head bgcolor="#ffebcd">
+      <head>
           <title>
               ${title}
           </title>
@@ -214,7 +214,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
 
 app.get('/articles/:articleName', function (req, res) {
   // SELECT * FROM article WHERE title = '\'; DELETE WHERE a = \'asdf'
-  pool.query("SELECT * FROM articles WHERE title = $1", [req.params.articleName], function (err, result) {
+  pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function (err, result) {
     if (err) {
         res.status(500).send(err.toString());
     } else {
