@@ -22,8 +22,8 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
-    color: #a52a2a;
-    font-family: verdana;
+    color: #4a4a4a;
+    font-family: sans-serif;
     padding-left: 20px;
     padding-right: 20px;
 }
