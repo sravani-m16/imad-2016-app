@@ -20,6 +20,7 @@ body {
 }
 
 .container {
+    background-image: url(ui/image.jpg);
     max-width: 800px;
     margin: 0 auto;
     color: #e9967a;
