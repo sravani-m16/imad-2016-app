@@ -2,6 +2,7 @@ body {
     font-family: sans-serif;
     margin-top: 60px;
     background-color: #2f4f4f; 
+    background-image: url(ui/image.jpg);
 }
 
 .center {
@@ -21,7 +22,6 @@ body {
 }
 
 .container {
-    background-image: url(ui/image.jpg);
     max-width: 800px;
     margin: 0 auto;
     color: #e9967a;
