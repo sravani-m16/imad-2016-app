@@ -94,9 +94,6 @@ function createTemplate (data) {
                         <a href="about.html">About</a>
                     </li>
                     <li>
-                        <a href="article-one">Sample Post</a>
-                    </li>
-                    <li>
                         <a href="contact.html">Contact</a>
                     </li>
                 </ul>
