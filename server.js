@@ -30,10 +30,8 @@ app.use(session({
 
 function createTemplate (data) {
     var title = data.title;
-    var subtitle = data.subtitle;
     var date = data.date;
     var heading = data.heading;
-    var author = data.author;
     var content = data.content;
     var backgroundimage = data.backgroundimage;
     var htmlTemplate = `
@@ -111,8 +109,6 @@ function createTemplate (data) {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>${heading}</h1>
-                        <h2 class="subheading">${subtitle}</h2>
-                        <span class="meta">Posted by  <a href="#">${author}</a> on ${date.toDateString()}</span>
                     </div>
                 </div>
             </div>
