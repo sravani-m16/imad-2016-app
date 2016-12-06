@@ -463,6 +463,10 @@ app.get('/vendor/scrollreveal/scrollreveal.min.js', function(req, res) {
    res.sendFile(path.join(__dirname, 'ui/vendor/scrollreveal', 'scrollreveal.min.js')); 
 });
 
+app.get('/favicon.ico', funtion(req, res) {
+   res.sendFile(path.join(__dirname, 'ui', 'favicon.ico')); 
+});
+
 app.get('/img/about-bg.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'about-bg.jpg'));
 });
@@ -475,24 +479,24 @@ app.get('/img/header.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
 });
 
-app.get('/img/IMG-20151127-WA0010.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'IMG-20151127-WA0010.jpg'));
+app.get('/img/Iimage.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
 });
 
 app.get('/img/cloudcomputing.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
 });
 
-app.get('/img/contact_me.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
+app.get('/img/app.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
 });
 
-app.get('/img/javascript1.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'javascript1.jpg'));
+app.get('/img/iot.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
 });
 
-app.get('/img/web_security.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'web_security'));
+app.get('/img/web.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'web.jpg'));
 });
 
 app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', function (req, res) {
@@ -503,8 +507,25 @@ app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg', function (re
   res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/fonts/', 'glyphicons-halflings.svg'));
 });
 
+app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/fonts/', 'glyphicons-halflings.eot'));
+});
+
+app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/fonts/', 'glyphicons-halflings.woff'));
+});
+
+
 app.get('/vendor/font-awesome/fonts/fontawesome-webfont.ttf', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'fontawesome-webfont.ttf'));
+});
+
+app.get('/vendor/font-awesome/fonts/fontawesome-webfont.svg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'fontawesome-webfont.svg'));
+});
+
+app.get('/vendor/font-awesome/fonts/FontAwesome.otf', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'FontAwesome.otf'));
 });
 
 app.get('/vendor/font-awesome/fonts/fontawesome-webfont.woff', function (req, res) {
@@ -512,6 +533,22 @@ app.get('/vendor/font-awesome/fonts/fontawesome-webfont.woff', function (req, re
 });
   app.get('/vendor/font-awesome/fonts/fontawesome-webfont.woff2', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'fontawesome-webfont.woff2'));
+});
+
+app.get('/vendor/font-awesome/scss/font-awesome.scss', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , 'font-awesome.scss'));
+});
+
+app.get('/vendor/font-awesome/scss/_core.scss', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , '_core.scss'));
+});
+
+app.get('/vendor/font-awesome/scss/_animated.scss', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , '_animated.scss'));
+});
+
+app.get('/vendor/font-awesome/scss/_list.scss', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , '_list.scss'));
 });
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
