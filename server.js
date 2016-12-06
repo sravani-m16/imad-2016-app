@@ -6,59 +6,60 @@ var crypto = require('crypto');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-// commit
 var config = {
-    user: 'sravani-m16',
-    database: 'sravani-m16',
-    host: 'db.imad.hasura-app.io',
-    port: '5432',
-    password: process.env.DB_PASSWORD
+    user : 'aniketaditya',
+    database : 'aniketaditya',
+    host : 'db.imad.hasura-app.io',
+    port : '5432',
+    password : process.env.DB_PASSWORD
 };
 
 var app = express();
 app.use(morgan('combined'));
+var path = require('path');
+
+app.use(express.static(__dirname + '/ui'));
+
 app.use(bodyParser.json());
+
 app.use(session({
     secret: 'someRandomSecretValue',
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 30}
 }));
+
 
 function createTemplate (data) {
     var title = data.title;
     var subtitle = data.subtitle;
     var date = data.date;
     var heading = data.heading;
-    var authir = data.author;
+    var author = data.author;
     var content = data.content;
     var backgroundimage = data.backgroundimage;
-    
     var htmlTemplate = `
     <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
 
-<head>
+    <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>${title}</title>
+    <title>
+    ${title}
+    </title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
-    <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="/css/my-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,81 +70,83 @@ function createTemplate (data) {
 
 </head>
 
-<body id="page-top">
+<body>
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand" href="index.html">Home</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="index.html">Home</a>
+                        <a href="index.html">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="about.html">About</a>
+                        <a href="about.html">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="article.html">Articles</a>
+                        <a href="article-one">Sample Post</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="contact.html">Contact</a>
+                        <a href="contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.container -->
     </nav>
 
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <h1 class="homeHeading">${heading}</h1>
-                <h2 class="subheading">${subtitle}</h2>
-                <span class="meta">Posted by  <a href="#">${author}</a> on ${date.toDateString()}</span>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/img/${backgroundimage}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>${heading}</h1>
+                        <h2 class="subheading">${subtitle}</h2>
+                        <span class="meta">Posted by  <a href="#">${author}</a> on ${date.toDateString()}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <section class="bg-primary" id="about">
+    <!-- Post Content -->
+    <article>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="about.html">${content}</a>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>${content}</p>
+                    <hr?
+                     <h2>Comments</h2>
+              <div id="comment_form">
+              </div>
+              <div id="comments">
+                <center>Loading comments...</center>
+              </div>
+          </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="articles">
+    </article>
+    
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Articles</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <a href="articles.html">
-                ${content}
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <ul class="list-inline text-center">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
                         <li>
                             <a href="https://twitter.com/aniket_aditya">
                                 <span class="fa-stack fa-lg">
@@ -169,35 +172,33 @@ function createTemplate (data) {
                             </a>
                         </li>
                     </ul>
+                    <p class="copyright text-muted">Copyright &copy; Aniket Aditya 2016</p>
+                </div>
+            </div>
         </div>
-    </section>
+    </footer>
+    
+    <script type="text/javascript" src="article.js"></script>
 
     <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/jquery/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="js/creative.min.js"></script>
+    <script src="/js/my-blog.js"></script>
 
 </body>
 
 </html>
-
-    `;
-    return htmlTemplate;
+`;
+return htmlTemplate;
 }
-
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
-});
-
 
 function hash (input, salt) {
     // How do we create a hash?
@@ -213,7 +214,7 @@ app.get('/hash/:input', function(req, res) {
 
 app.post('/create-user', function (req, res) {
    // username, password
-   // {"username": "tanmai", "password": "password"}
+   // {"username": "username", "password": "password"}
    // JSON
    var username = req.body.username;
    var password = req.body.password;
@@ -278,15 +279,20 @@ app.get('/check-login', function (req, res) {
 
 app.get('/logout', function (req, res) {
    delete req.session.auth;
-   res.send('<html><body>Logged out!<br/><br/><a href="/">Back to home</a></body></html>');
+   res.status(200).redirect('/?msg=logged%20out');
 });
+
+/*app.get('/logout', function (req, res) {
+  delete req.session.auth;
+  res.status(200).send('1');
+});*/
 
 var pool = new Pool(config);
 
 app.get('/get-articles', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT * FROM articles ORDER BY date DESC', function (err, result) {
+   pool.query('SELECT * FROM article ORDER BY date DESC', function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -298,7 +304,7 @@ app.get('/get-articles', function (req, res) {
 app.get('/get-comments/:articleName', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT comment.*, "user".username FROM articles, comment, "user" WHERE articles.title = $1 AND articles.id = comment.article_id AND comment.user_id = "user".id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
+   pool.query('SELECT comment.*, "user".username FROM article, comment, "user" WHERE article.title = $1 AND article.id = comment.article_id AND comment.user_id = "user".id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -311,7 +317,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
    // Check if the user is logged in
     if (req.session && req.session.auth && req.session.auth.userId) {
         // First check if the article exists and get the article-id
-        pool.query('SELECT * from articles where title = $1', [req.params.articleName], function (err, result) {
+        pool.query('SELECT * from article where title = $1', [req.params.articleName], function (err, result) {
             if (err) {
                 res.status(500).send(err.toString());
             } else {
@@ -327,7 +333,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
                             if (err) {
                                 res.status(500).send(err.toString());
                             } else {
-                                res.status(200).send('Comment inserted!');
+                                res.status(200).send('Comment inserted!')
                             }
                         });
                 }
@@ -338,28 +344,31 @@ app.post('/submit-comment/:articleName', function (req, res) {
     }
 });
 
-
 var counter = 0;
 app.get('/counter',function(req,res){
     counter = counter+1;
    res.send(counter.toString()); 
 });
 
-
-app.get('/articles/:articleName', function (req, res) {
-  // SELECT * FROM article WHERE title = '\'; DELETE WHERE a = \'asdf'
-  pool.query("SELECT * FROM articles WHERE title = $1", [req.params.articleName], function (err, result) {
-    if (err) {
-        res.status(500).send(err.toString());
+app.get('/:articleName',function (req,res) {
+    pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function(err,result) {
+        if(err){
+            res.status(500).send(err.toString());
     } else {
-        if (result.rows.length === 0) {
+        if(result.rows.length === 0)
+        {
             res.status(404).send('Article not found');
-        } else {
+            } 
+            else {
             var articleData = result.rows[0];
             res.send(createTemplate(articleData));
+            }
         }
-    }
-  });
+    });
+});
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui','index.html'));
 });
 
 app.get('/ui/:fileName', function (req, res) {
@@ -386,85 +395,40 @@ app.get('/contact.html', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'contact.html'));
 });
 
-app.get('/css/creative.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/css', 'creative.css'));
+app.get('/css/my-blog.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/css', 'my-blog.css'));
 });
 
-app.get('/css/creative.min.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/css', 'creative.min.css'));
-});
-
-/*app.get('/js/contact_me.js', function (req, res) {
+app.get('/js/contact_me.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/js', 'contact_me.js'));
 });
 
 app.get('/mail/contact_me.php', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/mail', 'contact_me.php'));
-});*/
-
-app.get('/js/creative.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/js', 'creative.js'));
 });
 
-app.get('/js/creative.min.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/js', 'creative.min.js'));
+app.get('/js/jqBootstrapValidation.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/js', 'jqBootstrapValidation.js'));
 });
 
+app.get('/js/my-blog.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/js', 'my-blog.js'));
+});
 
 app.get('/vendor/bootstrap/css/bootstrap.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/css', 'bootstrap.css'));
-});
-
-app.get('/vendor/bootstrap/css/bootstrap.min.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/css', 'bootstrap.min.css'));
 });
 
 app.get('/vendor/bootstrap/js/bootstrap.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/js', 'bootstrap.js'));
 });
 
-app.get('/vendor/bootstrap/js/bootstrap.min.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/js', 'bootstrap.min.js'));
-});
-
 app.get('/vendor/font-awesome/css/font-awesome.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/css', 'font-awesome.css'));
 });
 
-app.get('/vendor/font-awesome/css/font-awesome.min.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/css', 'font-awesome.min.css'));
-});
-
 app.get('/vendor/jquery/jquery.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/jquery', 'jquery.js'));
-});
-
-app.get('/vendor/jquery/jquery.min.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/jquery', 'jquery.min.js'));
-});
-
-app.get('/vendor/magnific-popup/jquery.magnific-popup.js', function(req, res) {
-   res.sendFile(path.join(__dirname, 'ui/vendor/magnific-popup', 'jquery.magnific-popup.js')); 
-});
-
-app.get('/vendor/magnific-popup/jquery.magnific-popup.min.js', function(req, res) {
-   res.sendFile(path.join(__dirname, 'ui/vendor/magnific-popup', 'jquery.magnific-popup.min.js')); 
-});
-
-app.get('/vendor/magnific-popup/magnific-popup.css', function(req, res) {
-   res.sendFile(path.join(__dirname, 'ui/vendor/magnific-popup', 'magnific-popup.css')); 
-});
-
-app.get('/vendor/scrollreveal/scrollreveal.js', function(req, res) {
-   res.sendFile(path.join(__dirname, 'ui/vendor/scrollreveal', 'scrollreveal.js')); 
-});
-
-app.get('/vendor/scrollreveal/scrollreveal.min.js', function(req, res) {
-   res.sendFile(path.join(__dirname, 'ui/vendor/scrollreveal', 'scrollreveal.min.js')); 
-});
-
-app.get('/favicon.ico', funtion(req, res) {
-   res.sendFile(path.join(__dirname, 'ui', 'favicon.ico')); 
 });
 
 app.get('/img/about-bg.jpg', function (req, res) {
@@ -475,28 +439,28 @@ app.get('/img/contact.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact.jpg'));
 });
 
-app.get('/img/header.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
+app.get('/img/home-bg.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'home-bg.jpg'));
 });
 
-app.get('/img/Iimage.jpg', function (req, res) {
+app.get('/img/image.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
 });
 
-app.get('/img/cloudcomputing.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
+app.get('/img/technology.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'technology.jpg'));
 });
 
-app.get('/img/app.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
+app.get('/img/contact_me.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
 });
 
-app.get('/img/iot.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
+app.get('/img/javascript1.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'javascript1.jpg'));
 });
 
-app.get('/img/web.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'web.jpg'));
+app.get('/img/web_security.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'web_security'));
 });
 
 app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', function (req, res) {
@@ -507,25 +471,8 @@ app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg', function (re
   res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/fonts/', 'glyphicons-halflings.svg'));
 });
 
-app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/fonts/', 'glyphicons-halflings.eot'));
-});
-
-app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/fonts/', 'glyphicons-halflings.woff'));
-});
-
-
 app.get('/vendor/font-awesome/fonts/fontawesome-webfont.ttf', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'fontawesome-webfont.ttf'));
-});
-
-app.get('/vendor/font-awesome/fonts/fontawesome-webfont.svg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'fontawesome-webfont.svg'));
-});
-
-app.get('/vendor/font-awesome/fonts/FontAwesome.otf', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'FontAwesome.otf'));
 });
 
 app.get('/vendor/font-awesome/fonts/fontawesome-webfont.woff', function (req, res) {
@@ -533,22 +480,6 @@ app.get('/vendor/font-awesome/fonts/fontawesome-webfont.woff', function (req, re
 });
   app.get('/vendor/font-awesome/fonts/fontawesome-webfont.woff2', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/fonts' , 'fontawesome-webfont.woff2'));
-});
-
-app.get('/vendor/font-awesome/scss/font-awesome.scss', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , 'font-awesome.scss'));
-});
-
-app.get('/vendor/font-awesome/scss/_core.scss', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , '_core.scss'));
-});
-
-app.get('/vendor/font-awesome/scss/_animated.scss', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , '_animated.scss'));
-});
-
-app.get('/vendor/font-awesome/scss/_list.scss', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/scss' , '_list.scss'));
 });
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80

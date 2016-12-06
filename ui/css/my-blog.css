@@ -1,5 +1,4 @@
 
-
 body {
   font-family: 'Lora', 'Times New Roman', serif;
   font-size: 20px;
@@ -376,16 +375,6 @@ form .row:first-child .floating-label-form-group {
   color: #777777;
   background-color: #333333;
   cursor: not-allowed;
-}
-.comment {
-    margin-left: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.commenter {
-    font-style: italic;
-    font-size: 0.8em;
 }
 ::-moz-selection {
   color: white;
