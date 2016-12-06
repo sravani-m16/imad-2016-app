@@ -148,15 +148,7 @@ function createTemplate (data) {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="https://twitter.com/aniket_aditya">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/aniket.aditya">
+                            <a href="https://www.facebook.com/sravani.mandaleeka">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -164,7 +156,7 @@ function createTemplate (data) {
                             </a>
                         </li>
                         <li>
-                            <a href="https://github.com/aniketaditya">
+                            <a href="https://github.com/sravani-m16">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -172,7 +164,7 @@ function createTemplate (data) {
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Aniket Aditya 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Sravani Mandaleeka 2016</p>
                 </div>
             </div>
         </div>
@@ -439,28 +431,32 @@ app.get('/img/contact.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact.jpg'));
 });
 
-app.get('/img/home-bg.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'home-bg.jpg'));
+app.get('/img/header.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
 });
 
 app.get('/img/image.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
 });
 
-app.get('/img/technology.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'technology.jpg'));
+app.get('/img/iot.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
 });
 
 app.get('/img/contact_me.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
 });
 
-app.get('/img/javascript1.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'javascript1.jpg'));
+app.get('/img/cloudcomputing.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
 });
 
-app.get('/img/web_security.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'web_security'));
+app.get('/img/app.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
+});
+
+app.get('/img/web.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'web.jpg'));
 });
 
 app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', function (req, res) {
