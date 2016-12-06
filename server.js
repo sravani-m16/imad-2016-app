@@ -386,40 +386,81 @@ app.get('/contact.html', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'contact.html'));
 });
 
-app.get('/css/my-blog.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/css', 'my-blog.css'));
+app.get('/css/creative.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/css', 'creative.css'));
 });
 
-app.get('/js/contact_me.js', function (req, res) {
+app.get('/css/creative.min.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/css', 'creative.min.css'));
+});
+
+/*app.get('/js/contact_me.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/js', 'contact_me.js'));
 });
 
 app.get('/mail/contact_me.php', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/mail', 'contact_me.php'));
+});*/
+
+app.get('/js/creative.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/js', 'creative.js'));
 });
 
-app.get('/js/jqBootstrapValidation.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/js', 'jqBootstrapValidation.js'));
+app.get('/js/creative.min.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/js', 'creative.min.js'));
 });
 
-app.get('/js/my-blog.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/js', 'my-blog.js'));
-});
 
 app.get('/vendor/bootstrap/css/bootstrap.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/css', 'bootstrap.css'));
+});
+
+app.get('/vendor/bootstrap/css/bootstrap.min.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/css', 'bootstrap.min.css'));
 });
 
 app.get('/vendor/bootstrap/js/bootstrap.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/js', 'bootstrap.js'));
 });
 
+app.get('/vendor/bootstrap/js/bootstrap.min.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/bootstrap/js', 'bootstrap.min.js'));
+});
+
 app.get('/vendor/font-awesome/css/font-awesome.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/css', 'font-awesome.css'));
 });
 
+app.get('/vendor/font-awesome/css/font-awesome.min.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/font-awesome/css', 'font-awesome.min.css'));
+});
+
 app.get('/vendor/jquery/jquery.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/vendor/jquery', 'jquery.js'));
+});
+
+app.get('/vendor/jquery/jquery.min.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/vendor/jquery', 'jquery.min.js'));
+});
+
+app.get('/vendor/magnific-popup/jquery.magnific-popup.js', function(req, res) {
+   res.sendFile(path.join(__dirname, 'ui/vendor/magnific-popup', 'jquery.magnific-popup.js')); 
+});
+
+app.get('/vendor/magnific-popup/jquery.magnific-popup.min.js', function(req, res) {
+   res.sendFile(path.join(__dirname, 'ui/vendor/magnific-popup', 'jquery.magnific-popup.min.js')); 
+});
+
+app.get('/vendor/magnific-popup/magnific-popup.css', function(req, res) {
+   res.sendFile(path.join(__dirname, 'ui/vendor/magnific-popup', 'magnific-popup.css')); 
+});
+
+app.get('/vendor/scrollreveal/scrollreveal.js', function(req, res) {
+   res.sendFile(path.join(__dirname, 'ui/vendor/scrollreveal', 'scrollreveal.js')); 
+});
+
+app.get('/vendor/scrollreveal/scrollreveal.min.js', function(req, res) {
+   res.sendFile(path.join(__dirname, 'ui/vendor/scrollreveal', 'scrollreveal.min.js')); 
 });
 
 app.get('/img/about-bg.jpg', function (req, res) {
@@ -430,16 +471,16 @@ app.get('/img/contact.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact.jpg'));
 });
 
-app.get('/img/home-bg.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'home-bg.jpg'));
+app.get('/img/header.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
 });
 
-app.get('/img/image.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
+app.get('/img/IMG-20151127-WA0010.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'IMG-20151127-WA0010.jpg'));
 });
 
-app.get('/img/technology.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'technology.jpg'));
+app.get('/img/cloudcomputing.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
 });
 
 app.get('/img/contact_me.jpg', function (req, res) {
