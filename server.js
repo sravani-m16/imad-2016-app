@@ -17,8 +17,11 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 var path = require('path');
+
 app.use(express.static(__dirname + '/ui'));
+
 app.use(bodyParser.json());
+
 app.use(session({
     secret: 'someRandomSecretValue',
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 30}
@@ -27,46 +30,38 @@ app.use(session({
 
 function createTemplate (data) {
     var title = data.title;
+    var subtitle = data.subtitle;
     var date = data.date;
     var heading = data.heading;
+    var author = data.author;
     var content = data.content;
     var backgroundimage = data.backgroundimage;
     var htmlTemplate = `
     <!DOCTYPE html>
     <html lang="en">
-
     <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>
     ${title}
     </title>
-
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-
     <!-- Theme CSS -->
     <link href="/css/my-blog.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
-
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
@@ -78,7 +73,6 @@ function createTemplate (data) {
                 </button>
                 <a class="navbar-brand" href="index.html">Home</a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -89,6 +83,9 @@ function createTemplate (data) {
                         <a href="about.html">About</a>
                     </li>
                     <li>
+                        <a href="article-one">Sample Post</a>
+                    </li>
+                    <li>
                         <a href="contact.html">Contact</a>
                     </li>
                 </ul>
@@ -97,7 +94,6 @@ function createTemplate (data) {
         </div>
         <!-- /.container -->
     </nav>
-
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
     <header class="intro-header" style="background-image: url('/img/${backgroundimage}')">
@@ -106,12 +102,13 @@ function createTemplate (data) {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>${heading}</h1>
+                        <h2 class="subheading">${subtitle}</h2>
+                        <span class="meta">Posted by  <a href="#">${author}</a> on ${date.toDateString()}</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
     <!-- Post Content -->
     <article>
         <div class="container">
@@ -161,22 +158,16 @@ function createTemplate (data) {
     </footer>
     
     <script type="text/javascript" src="article.js"></script>
-
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="/vendor/bootstrap/js/bootstrap.js"></script>
-
     <!-- Contact Form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>
     <script src="/js/contact_me.js"></script>
-
     <!-- Theme JavaScript -->
     <script src="/js/my-blog.js"></script>
-
 </body>
-
 </html>
 `;
 return htmlTemplate;
@@ -274,7 +265,7 @@ var pool = new Pool(config);
 app.get('/get-articles', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT * FROM articles ORDER BY date DESC', function (err, result) {
+   pool.query('SELECT * FROM article ORDER BY date DESC', function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -429,24 +420,24 @@ app.get('/img/image.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
 });
 
-app.get('/img/iot.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
+app.get('/img/app.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
 });
 
 app.get('/img/contact_me.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
 });
 
-app.get('/img/cloudcomputing.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
-});
-
-app.get('/img/app.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
+app.get('/img/iot.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
 });
 
 app.get('/img/web.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'web.jpg'));
+});
+
+app.get('/img/cloudcomputing.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
 });
 
 app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', function (req, res) {
