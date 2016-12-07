@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var config = {
-    user : 'sravani-m16',
-    database : 'sravani-m16',
+    user : 'aniketaditya',
+    database : 'aniketaditya',
     host : 'db.imad.hasura-app.io',
     port : '5432',
     password : process.env.DB_PASSWORD
@@ -39,29 +39,39 @@ function createTemplate (data) {
     var htmlTemplate = `
     <!DOCTYPE html>
     <html lang="en">
+
     <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>
     ${title}
     </title>
+
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
     <!-- Theme CSS -->
     <link href="/css/my-blog.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
+
 <body>
+
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
@@ -73,6 +83,7 @@ function createTemplate (data) {
                 </button>
                 <a class="navbar-brand" href="index.html">Home</a>
             </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -94,6 +105,7 @@ function createTemplate (data) {
         </div>
         <!-- /.container -->
     </nav>
+
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
     <header class="intro-header" style="background-image: url('/img/${backgroundimage}')">
@@ -109,6 +121,7 @@ function createTemplate (data) {
             </div>
         </div>
     </header>
+
     <!-- Post Content -->
     <article>
         <div class="container">
@@ -135,7 +148,15 @@ function createTemplate (data) {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="https://www.facebook.com/sravani.mandaleeka">
+                            <a href="https://twitter.com/aniket_aditya">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/aniket.aditya">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -143,7 +164,7 @@ function createTemplate (data) {
                             </a>
                         </li>
                         <li>
-                            <a href="https://github.com/sravani-m16">
+                            <a href="https://github.com/aniketaditya">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -151,23 +172,29 @@ function createTemplate (data) {
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Sravani Mandaleeka 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Aniket Aditya 2016</p>
                 </div>
             </div>
         </div>
     </footer>
     
     <script type="text/javascript" src="article.js"></script>
+
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="/vendor/bootstrap/js/bootstrap.js"></script>
+
     <!-- Contact Form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>
     <script src="/js/contact_me.js"></script>
+
     <!-- Theme JavaScript -->
     <script src="/js/my-blog.js"></script>
+
 </body>
+
 </html>
 `;
 return htmlTemplate;
@@ -277,7 +304,7 @@ app.get('/get-articles', function (req, res) {
 app.get('/get-comments/:articleName', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT comment.*, "user".username FROM articles, comment, "user" WHERE articles.title = $1 AND articles.id = comment.article_id AND comment.user_id = "user".id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
+   pool.query('SELECT comment.*, "user".username FROM article, comment, "user" WHERE article.title = $1 AND article.id = comment.article_id AND comment.user_id = "user".id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -290,7 +317,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
    // Check if the user is logged in
     if (req.session && req.session.auth && req.session.auth.userId) {
         // First check if the article exists and get the article-id
-        pool.query('SELECT * from articles where title = $1', [req.params.articleName], function (err, result) {
+        pool.query('SELECT * from article where title = $1', [req.params.articleName], function (err, result) {
             if (err) {
                 res.status(500).send(err.toString());
             } else {
@@ -324,7 +351,7 @@ app.get('/counter',function(req,res){
 });
 
 app.get('/:articleName',function (req,res) {
-    pool.query("SELECT * FROM articles WHERE title = $1", [req.params.articleName], function(err,result) {
+    pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function(err,result) {
         if(err){
             res.status(500).send(err.toString());
     } else {
@@ -412,32 +439,28 @@ app.get('/img/contact.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact.jpg'));
 });
 
-app.get('/img/header.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
+app.get('/img/home-bg.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'home-bg.jpg'));
 });
 
 app.get('/img/image.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
 });
 
-app.get('/img/app.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
+app.get('/img/technology.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'technology.jpg'));
 });
 
 app.get('/img/contact_me.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
 });
 
-app.get('/img/iot.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
+app.get('/img/javascript1.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'javascript1.jpg'));
 });
 
-app.get('/img/web.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'web.jpg'));
-});
-
-app.get('/img/cloudcomputing.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
+app.get('/img/web_security.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'web_security'));
 });
 
 app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', function (req, res) {
