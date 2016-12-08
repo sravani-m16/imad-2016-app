@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var config = {
-    user : 'aniketaditya',
-    database : 'aniketaditya',
+    user : 'sravani-m16',
+    database : 'sravani-m16',
     host : 'db.imad.hasura-app.io',
     port : '5432',
     password : process.env.DB_PASSWORD
@@ -33,7 +33,6 @@ function createTemplate (data) {
     var subtitle = data.subtitle;
     var date = data.date;
     var heading = data.heading;
-    var author = data.author;
     var content = data.content;
     var backgroundimage = data.backgroundimage;
     var htmlTemplate = `
@@ -94,9 +93,6 @@ function createTemplate (data) {
                         <a href="about.html">About</a>
                     </li>
                     <li>
-                        <a href="article-one">Sample Post</a>
-                    </li>
-                    <li>
                         <a href="contact.html">Contact</a>
                     </li>
                 </ul>
@@ -114,8 +110,6 @@ function createTemplate (data) {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>${heading}</h1>
-                        <h2 class="subheading">${subtitle}</h2>
-                        <span class="meta">Posted by  <a href="#">${author}</a> on ${date.toDateString()}</span>
                     </div>
                 </div>
             </div>
@@ -148,15 +142,7 @@ function createTemplate (data) {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="https://twitter.com/aniket_aditya">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/aniket.aditya">
+                            <a href="https://www.facebook.com/sravani.mandaleeka">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -164,7 +150,7 @@ function createTemplate (data) {
                             </a>
                         </li>
                         <li>
-                            <a href="https://github.com/aniketaditya">
+                            <a href="https://github.com/sravani-m16">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -172,7 +158,7 @@ function createTemplate (data) {
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Aniket Aditya 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Sravani 2016</p>
                 </div>
             </div>
         </div>
@@ -292,7 +278,7 @@ var pool = new Pool(config);
 app.get('/get-articles', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT * FROM article ORDER BY date DESC', function (err, result) {
+   pool.query('SELECT * FROM articles ORDER BY date DESC', function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -304,7 +290,7 @@ app.get('/get-articles', function (req, res) {
 app.get('/get-comments/:articleName', function (req, res) {
    // make a select request
    // return a response with the results
-   pool.query('SELECT comment.*, "user".username FROM article, comment, "user" WHERE article.title = $1 AND article.id = comment.article_id AND comment.user_id = "user".id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
+   pool.query('SELECT comment.*, "user".username FROM articles, comment, "user" WHERE articles.title = $1 AND articles.id = comment.article_id AND comment.user_id = "user".id ORDER BY comment.timestamp DESC', [req.params.articleName], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
@@ -317,7 +303,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
    // Check if the user is logged in
     if (req.session && req.session.auth && req.session.auth.userId) {
         // First check if the article exists and get the article-id
-        pool.query('SELECT * from article where title = $1', [req.params.articleName], function (err, result) {
+        pool.query('SELECT * from articles where title = $1', [req.params.articleName], function (err, result) {
             if (err) {
                 res.status(500).send(err.toString());
             } else {
@@ -351,7 +337,7 @@ app.get('/counter',function(req,res){
 });
 
 app.get('/:articleName',function (req,res) {
-    pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function(err,result) {
+    pool.query("SELECT * FROM articles WHERE title = $1", [req.params.articleName], function(err,result) {
         if(err){
             res.status(500).send(err.toString());
     } else {
