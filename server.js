@@ -425,28 +425,28 @@ app.get('/img/contact.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'contact.jpg'));
 });
 
-app.get('/img/home-bg.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'home-bg.jpg'));
+app.get('/img/header.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
 });
 
-app.get('/img/image.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'image.jpg'));
+app.get('/img/img.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'img.jpg'));
 });
 
-app.get('/img/technology.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'technology.jpg'));
+app.get('/img/app.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'app.jpg'));
 });
 
-app.get('/img/contact_me.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
+app.get('/img/cloudcomputing.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'cloudcomputing.jpg'));
 });
 
-app.get('/img/javascript1.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'javascript1.jpg'));
+app.get('/img/iot.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'iot.jpg'));
 });
 
-app.get('/img/web_security.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui/img', 'web_security'));
+app.get('/img/web.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'web'));
 });
 
 app.get('/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', function (req, res) {
