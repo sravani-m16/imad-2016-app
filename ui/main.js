@@ -160,7 +160,6 @@ function loadArticles () {
                                 <h2 class="post-title">
                                      ${articleData[i].heading}
                                 </h2>
-                                <p class="post-meta">Posted by <a href="/about.html">${articleData[i].author}</a> on (${articleData[i].date.split('T')[0]})</p>
                                 </a>
                 </div>
                 </div>
