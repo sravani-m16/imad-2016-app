@@ -429,6 +429,10 @@ app.get('/img/header.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'header.jpg'));
 });
 
+app.get('/img/contact_me.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui/img', 'contact_me.jpg'));
+});
+
 app.get('/img/img.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui/img', 'img.jpg'));
 });
